@@ -1,4 +1,3 @@
-setwd("~/Desktop/MillerLab/LeafCutter/Third_Run/whole_genome")
 library(data.table)
 library(stringr)
 library(dplyr)
