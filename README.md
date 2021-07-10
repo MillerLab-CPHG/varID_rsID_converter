@@ -1,1 +1,1 @@
-# hg38_gtex_ids_data
+GTEx varID to RSID or vice versa converter
