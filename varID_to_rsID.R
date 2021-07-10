@@ -19,7 +19,7 @@ GRCh38_gtex_id_converter <- function(id_input_file, type_of_id_to_convert, outpu
   id_file = fread(id_input_file)
   
   if (type_of_id_to_convert == 1){
-    id_file = fread("GTEx_aorta_sqtls_varIDs.txt")
+    id_file = fread(id_input_file)
     
     dummy = data.frame(str_split_fixed(id_file$varID, "_", 5))
     dummy2 = as.data.frame(table(dummy[,1]))
@@ -31,7 +31,7 @@ GRCh38_gtex_id_converter <- function(id_input_file, type_of_id_to_convert, outpu
     ##Downloads only necessary chr data and creates a dataframe of varID and rsID per chr
     for (chr in dummy2$Chr) {
       print(paste0("Printing chr",chr," data"))
-      chr_data = fread(paste0("GTEx_variants/chr",chr,"_GRCh38_gtex_ids.txt.gz"), header = F)
+      chr_data = fread(paste0("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr",chr,"_GRCh38_gtex_ids.txt.gz"), header = F)
       var_IDs = data.frame(id_file[dummy$X1 == paste0("chr",chr),])
       colnames(var_IDs) = c("varId")
       chr_join = left_join(var_IDs, chr_data, by = c("varId" = "V1"))
@@ -56,30 +56,32 @@ GRCh38_gtex_id_converter <- function(id_input_file, type_of_id_to_convert, outpu
     }
   }else if (type_of_id_to_convert == 2){
     ##Downloads all the chr_data file from github
-    chr1_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr1_GRCh38_gtex_ids.txt.gz", header = F)
-    chr2_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr2_GRCh38_gtex_ids.txt.gz", header = F)
-    chr3_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr3_GRCh38_gtex_ids.txt.gz", header = F)
-    chr4_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr4_GRCh38_gtex_ids.txt.gz", header = F)
-    chr5_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr5_GRCh38_gtex_ids.txt.gz", header = F)
-    chr6_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr6_GRCh38_gtex_ids.txt.gz", header = F)
-    chr7_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr7_GRCh38_gtex_ids.txt.gz", header = F)
-    chr8_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr8_GRCh38_gtex_ids.txt.gz", header = F)
-    chr9_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr9_GRCh38_gtex_ids.txt.gz", header = F)
-    chr10_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr10_GRCh38_gtex_ids.txt.gz", header = F)
-    chr11_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr11_GRCh38_gtex_ids.txt.gz", header = F)
-    chr12_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr12_GRCh38_gtex_ids.txt.gz", header = F)
-    chr13_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr13_GRCh38_gtex_ids.txt.gz", header = F)
-    chr14_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr14_GRCh38_gtex_ids.txt.gz", header = F)
-    chr15_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr15_GRCh38_gtex_ids.txt.gz", header = F)
-    chr16_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr16_GRCh38_gtex_ids.txt.gz", header = F)
-    chr17_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr17_GRCh38_gtex_ids.txt.gz", header = F)
-    chr18_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr18_GRCh38_gtex_ids.txt.gz", header = F)
-    chr19_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr19_GRCh38_gtex_ids.txt.gz", header = F)
-    chr20_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr20_GRCh38_gtex_ids.txt.gz", header = F)
-    chr21_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr21_GRCh38_gtex_ids.txt.gz", header = F)
-    chr22_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chr22_GRCh38_gtex_ids.txt.gz", header = F)
+    chr1_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr1_GRCh38_gtex_ids.txt.gz", header = F)
+    chr2_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr2_GRCh38_gtex_ids.txt.gz", header = F)
+    chr3_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr3_GRCh38_gtex_ids.txt.gz", header = F)
+    chr4_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr4_GRCh38_gtex_ids.txt.gz", header = F)
+    chr5_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr5_GRCh38_gtex_ids.txt.gz", header = F)
+    chr6_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr6_GRCh38_gtex_ids.txt.gz", header = F)
+    chr7_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr7_GRCh38_gtex_ids.txt.gz", header = F)
+    chr8_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr8_GRCh38_gtex_ids.txt.gz", header = F)
+    chr9_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr9_GRCh38_gtex_ids.txt.gz", header = F)
+    chr10_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr10_GRCh38_gtex_ids.txt.gz", header = F)
+    chr11_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr11_GRCh38_gtex_ids.txt.gz", header = F)
+    chr12_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr12_GRCh38_gtex_ids.txt.gz", header = F)
+    chr13_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr13_GRCh38_gtex_ids.txt.gz", header = F)
+    chr14_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr14_GRCh38_gtex_ids.txt.gz", header = F)
+    chr15_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr15_GRCh38_gtex_ids.txt.gz", header = F)
+    chr16_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr16_GRCh38_gtex_ids.txt.gz", header = F)
+    chr17_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr17_GRCh38_gtex_ids.txt.gz", header = F)
+    chr18_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr18_GRCh38_gtex_ids.txt.gz", header = F)
+    chr19_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr19_GRCh38_gtex_ids.txt.gz", header = F)
+    chr20_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr20_GRCh38_gtex_ids.txt.gz", header = F)
+    chr21_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr21_GRCh38_gtex_ids.txt.gz", header = F)
+    chr22_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chr22_GRCh38_gtex_ids.txt.gz", header = F)
     ##Downloads chrX data
-    chrX_data = fread("https://raw.github.com/nbbarrientos/hg38_gtex_ids_data/master/chrX_GRCh38_gtex_ids.txt.gz", header = F)
+    chrX_data = fread("https://raw.github.com/nbbarrientos/varID_rsID_converter/master/chrX_GRCh38_gtex_ids.txt.gz", header = F)
+    
+    
     
     ##Merges all chr_data files
     df1 = chr1_data
